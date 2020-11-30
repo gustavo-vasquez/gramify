@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Inter SemiBold';
+    src: url('../fonts/Inter-SemiBold.ttf');
+}
+
+body {
+    font-family: 'Inter';
+}
+
+.connect-account {
+    background: linear-gradient(to left, #7b4397, #dc2430);
+    border: none;
+}
+
+.form-control:focus {
+    border-color: rgba(220, 36, 48, 0.3);
+    box-shadow: 0 0 0 0.2rem rgba(220, 36, 48, 0.25);
+}
+
+.btn-default {
+    color: white;
+    background-color: crimson;
+    border-color: crimson;
+}
+
+.btn-default:hover {
+    color: white;
+    background-color: #c3092c;
+}
+
+a, a:hover {
+    color: crimson;
+}
+
+.h-separator {
+    height: 6rem;
+}
