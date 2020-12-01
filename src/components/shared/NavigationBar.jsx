@@ -1,10 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import history from '../../history';
+import { seeResults } from '../helpers';
 
 class NavigationBar extends React.Component {
-    render() {
+    render() {console.log(this.props);
         return (
             <nav className="navbar navbar-expand-lg navbar-light border-bottom px-0 mb-4">
-                <a className="navbar-brand" href="/"><i className="la la-instagram la-lg text-danger"></i> Instractaram</a>
+                <Link className="navbar-brand" to="/"><i className="la la-instagram la-lg text-danger"></i> Instractaram</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -20,9 +24,11 @@ class NavigationBar extends React.Component {
                         <a className="nav-link" href="/">Features</a>
                     </li>
                     </ul>
-                    <form className="form-inline my-2 my-lg-0 mr-auto">
-                        <input className="form-control mr-sm-2" type="text" placeholder="Nombre de usuario..."/>
-                        <button className="btn btn-secondary my-2 my-sm-0" type="submit"><i className="la la-search"></i></button>
+                    <form action="/" onSubmit={(event) => seeResults(event, history)} className="form-inline my-2 my-lg-0 mr-auto">
+                        <div className="input-group">
+                            <input type="text" name="username" className="form-control" placeholder="Buscar nombres de usuario..." required />
+                            <button className="btn" type="submit"><i className="la la-search"></i></button>
+                        </div>
                     </form>
                     <button className="btn btn-danger connect-account" type="button"><i className="la la-instagram la-lg"></i> Conectar con Instagram</button>
                 </div>

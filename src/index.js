@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import history from './history';
 import InstractaramApp from './components/InstractaramApp';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <Router history={history}>
       <InstractaramApp />
-    </BrowserRouter>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
