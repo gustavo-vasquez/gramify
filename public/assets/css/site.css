@@ -61,13 +61,34 @@ a, a:hover {
     height: 6rem;
 }
 
+.recent-searches-wrapper {
+    padding-top: 0.5rem;
+    font-size: 0.8rem;
+    text-align: left;
+    color: #721c24;
+}
+
+.recent-searches-wrapper a {
+    color: inherit;
+}
+
+.recent-searches-wrapper .alert {
+    padding: 0.2rem 0.5rem;
+    background-color: rgb(237 20 61 / 0.2);
+}
+
+.recent-searches-wrapper .alert > button {
+    font-size: 1rem;
+    padding: 0.28rem 0.5rem;
+}
+
 .result-link, .result-link:hover {
     text-decoration: unset;
     color: unset;
 }
 
 .result-link > .card:hover {
-    background-color: rgb(237 20 61 / 0.1);
+    background-color: rgb(237 20 61 / 0.2);
 }
 
 .truncate-text {
