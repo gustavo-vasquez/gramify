@@ -6,11 +6,9 @@ import InstractaramApp from './components/InstractaramApp';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
     <Router history={history}>
       <InstractaramApp />
-    </Router>
-  </React.StrictMode>,
+    </Router>,
   document.getElementById('root')
 );
 

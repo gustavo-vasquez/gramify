@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { searchUsers } from '../helpers';
+import history from '../../history';
+import { searchUsers, seeResults } from '../helpers';
 import Recent from './Recent';
 import { Spinner } from '../shared/Spinner';
 
@@ -32,8 +33,14 @@ class Results extends React.Component {
     render() {//console.log(this.state.results);
         return (
             <div>
-                <h3>Resultados de la búsqueda "{this.props.username}"</h3>
+                <form action="/" onSubmit={(event) => seeResults(event, history)}>
+                    <div className="input-group">
+                        <input type="text" name="username" className="form-control" placeholder="Escriba el nombre de usuario de Instagram..." defaultValue={this.props.username} autoFocus required />
+                        <button className="btn" type="submit" title="Buscar ahora"><i className="la la-search"></i></button>
+                    </div>
+                </form>
                 <Recent></Recent>
+                <h3 className="pt-3">Resultados de la búsqueda "{this.props.username}"</h3>
                 {!this.state.results ? <Spinner></Spinner> :
                 <div className="row pt-4">
                     { this.state.results.length > 0 ? this.state.results.map((result, index) =>
@@ -57,7 +64,10 @@ class Results extends React.Component {
                                 </div>
                             </Link>
                         </div>
-                    ) : <h3 className="text-muted py-4 m-auto"><i className="la la-low-vision"></i> Sin resultados</h3>}
+                    ) : <div className="text-center text-muted py-4 m-auto">
+                                <h3><i className="la la-low-vision"></i></h3>
+                                <h3>Sin resultados</h3>
+                            </div>}
                 </div>}
             </div>
         );

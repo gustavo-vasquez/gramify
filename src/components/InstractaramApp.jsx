@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import {NotFound} from './shared/NotFound';
+import { NotFound } from './shared/NotFound';
 import NavigationBar from './shared/NavigationBar';
 import Main from './home/Main';
 import Results from './search/Results';

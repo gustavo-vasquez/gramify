@@ -40,12 +40,12 @@ class Recent extends React.Component {
         this.setState({ content: recents });
     }
 
-    render() {console.log(this.state.content);
+    render() {
         return (
             this.state.content.length > 0 &&
             <div className="row recent-searches-wrapper">
                 <div className="col-12 col-md-auto">
-                    <p className="py-1">Búsquedas recientes:</p>
+                    <p className="py-1 text-dark">Búsquedas recientes:</p>
                 </div>
                 {this.state.content.map((username, index) =>
                 <div className="col-6 col-md-2" key={index}>
