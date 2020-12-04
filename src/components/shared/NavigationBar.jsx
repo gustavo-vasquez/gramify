@@ -5,7 +5,7 @@ import history from '../../history';
 import { seeResults } from '../helpers';
 
 class NavigationBar extends React.Component {
-    render() {console.log(this.props);
+    render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-light border-bottom px-0 mb-4">
                 <Link className="navbar-brand" to="/"><i className="la la-instagram la-lg text-danger"></i> Instractaram</Link>

@@ -91,6 +91,10 @@ a, a:hover {
     background-color: rgb(237 20 61 / 0.2);
 }
 
+.result-link i {
+    color: crimson;
+}
+
 .truncate-text {
     white-space: nowrap;
     overflow: hidden;
