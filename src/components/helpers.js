@@ -60,3 +60,16 @@ export const removeRecentSearch = (username) => {
 
     return [];
 }
+
+export const getUserInformation = async (profile) => {
+    try {
+        const userInfo = await client.getUserByUsername({ username: profile });
+        console.log(userInfo);
+
+        return userInfo;
+    }
+    catch(error) {
+        console.log(error);
+        return false;
+    }
+}

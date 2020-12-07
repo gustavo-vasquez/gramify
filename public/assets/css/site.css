@@ -110,6 +110,114 @@ a, a:hover {
     text-overflow: ellipsis;
 }
 
+.profile-picture-wrapper {
+    background: linear-gradient(to left, #7b4397, #dc2430);
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+    padding: 5px;
+}
+
+.media-tabs-wrapper {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition-property: color, background-color, border-color, box-shadow;
+    transition-duration: 0.15s, 0.15s, 0.15s, 0.15s;
+    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+    transition-delay: 0s, 0s, 0s, 0s;
+}
+
+.media-tab-title {
+    font-size: 1.1rem;
+}
+
+.media-tab-title > i {
+    font-size: larger;
+    vertical-align: middle;
+}
+
+.media-tab-title > span {
+    vertical-align: middle;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: crimson;
+}
+
+.pre-wrap {
+    white-space: pre-wrap;
+}
+
+.biography-size {
+    font-size: 0.9rem;
+}
+
+.multimedia-grid > div:nth-of-type(3n+3) > .media-wrapper {
+    margin-right: 0;
+}
+
+@media (min-width: 768px) {
+    .multimedia-grid > div:nth-of-type(3n+3) > .media-wrapper {
+        margin-right: 0.25rem;
+    }
+
+    .multimedia-grid > div:nth-of-type(4n+4) > .media-wrapper {
+        margin-right: 0;
+    }
+}
+
+.multimedia-grid button {
+    color: crimson;
+}
+
+.media-wrapper {
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.media-wrapper::before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 2;
+	display: block;
+	content: '';
+	width: 0;
+	height: 0;
+	background: rgba(255,255,255,.2);
+	border-radius: 100%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+.media-wrapper:hover::before {
+	-webkit-animation: circle .75s;
+	animation: circle .75s;
+}
+
+.media-wrapper img {
+    width: 100%;
+    height: 119px;
+    object-fit: cover;
+}
+
+@media (min-width: 768px) {
+    .media-wrapper img {
+        width: 100%;
+        height: 228px;
+        object-fit: cover;
+    }
+}
+
+.media-wrapper > button  {
+    color: crimson !important;
+}
+
 .spinner-wrapper {
     padding: 1.5rem;
 }
@@ -129,4 +237,31 @@ a, a:hover {
     to {
         transform: rotate(360deg);
     }
+}
+
+@-webkit-keyframes circle {
+	0% {
+		opacity: 1;
+	}
+	40% {
+		opacity: 1;
+	}
+	100% {
+		width: 200%;
+		height: 200%;
+		opacity: 0;
+	}
+}
+@keyframes circle {
+	0% {
+		opacity: 1;
+	}
+	40% {
+		opacity: 1;
+	}
+	100% {
+		width: 200%;
+		height: 200%;
+		opacity: 0;
+	}
 }
