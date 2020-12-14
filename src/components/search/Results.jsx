@@ -27,10 +27,12 @@ class Results extends React.Component {
 
     getAllResults = async () => {
         const results = await searchUsers(this.props.username);
-        this.setState({results: results});
+        this.setState({ results: results });
     }
 
-    render() {//console.log(this.state.results);
+    render() {
+        document.title = `Resultados de la búsqueda "${this.props.username}" • Instractaram`;
+
         return (
             <div>
                 <form action="/" onSubmit={(event) => seeResults(event, history)}>

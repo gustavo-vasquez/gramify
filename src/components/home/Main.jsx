@@ -1,10 +1,8 @@
 import React from 'react';
-//import Instagram from 'instagram-web-api';
 
 import { seeResults } from '../helpers';
 import Recent from '../search/Recent';
-
-//const client = new Instagram({ REACT_APP_USERNAME, REACT_APP_PASSWORD }, { language: 'es-ES', proxy: '/api' });
+import LastVisited from './LastVisited';
 
 class Main extends React.Component {
     /* constructor(props) {
@@ -13,22 +11,6 @@ class Main extends React.Component {
         this.state = {
             username: ''
         }
-
-        this.userInfo = this.getUserInformation();
-    } */
-
-    /* getUserInformation = async () => {
-        const userInfo = await client.getUserByUsername({ username: 'windowscentral' });
-        console.log(userInfo);
-        return userInfo;
-    } */
-
-    /* onChangeField = (event) => {
-        this.setState({username: event.target.value});
-    } */
-
-    /* componentDidMount() {
-        getRecentSearches()
     } */
 
     render() {
@@ -45,6 +27,7 @@ class Main extends React.Component {
                         </form>
                         <div className="h-separator"></div>
                         <p><i className="la la-lightbulb-o la-lg text-danger"></i> Para acceder a perfiles privados es necesario que <a href="/">inicies sesión con tu cuenta de Instagram</a>.</p>
+                        <LastVisited></LastVisited>
                     </div>
                 </div>
             </div>

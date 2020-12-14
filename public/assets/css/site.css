@@ -63,7 +63,7 @@ a, a:hover {
 }
 
 .h-separator {
-    height: 6rem;
+    height: 4rem;
 }
 
 .card {
@@ -122,6 +122,9 @@ a, a:hover {
     text-align: center;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+.media-tabs-wrapper a {
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     transition-property: color, background-color, border-color, box-shadow;
     transition-duration: 0.15s, 0.15s, 0.15s, 0.15s;
@@ -154,21 +157,21 @@ a, a:hover {
     font-size: 0.9rem;
 }
 
-.multimedia-grid > div:nth-of-type(3n+3) > .media-wrapper {
+.media-grid > div:nth-of-type(3n+3) > .media-wrapper {
     margin-right: 0;
 }
 
 @media (min-width: 768px) {
-    .multimedia-grid > div:nth-of-type(3n+3) > .media-wrapper {
+    .media-grid > div:nth-of-type(3n+3) > .media-wrapper {
         margin-right: 0.25rem;
     }
 
-    .multimedia-grid > div:nth-of-type(4n+4) > .media-wrapper {
+    .media-grid > div:nth-of-type(4n+4) > .media-wrapper {
         margin-right: 0;
     }
 }
 
-.multimedia-grid button {
+.media-grid button {
     color: crimson;
 }
 
@@ -184,7 +187,6 @@ a, a:hover {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	z-index: 2;
 	display: block;
 	content: '';
 	width: 0;
@@ -193,7 +195,8 @@ a, a:hover {
 	border-radius: 100%;
 	-webkit-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
-	opacity: 0;
+    opacity: 0;
+    pointer-events: none;
 }
 .media-wrapper:hover::before {
 	-webkit-animation: circle .75s;
@@ -206,6 +209,16 @@ a, a:hover {
     object-fit: cover;
 }
 
+.media-wrapper > figcaption {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    font-size: 1.5rem;
+    padding-right: 0.3rem;
+    text-shadow: -1px -1px 0 #252525, 1px -1px 0 #252525, -1px 1px 0 #252525, 1px 1px 0 #252525;
+}
+
 @media (min-width: 768px) {
     .media-wrapper img {
         width: 100%;
@@ -216,6 +229,105 @@ a, a:hover {
 
 .media-wrapper > button  {
     color: crimson !important;
+}
+
+.add-more-content {
+    width: 50%;
+    margin: 0 auto 1.5rem auto;
+}
+
+.page-separator {
+    width: 100%;
+    border-style: dashed;
+}
+
+#view_wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255,255,255,0.9);
+  overflow-y: scroll;
+  z-index: 2;
+  animation-name: slideUp;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  -webkit-animation-name: slideUp;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-iteration-count: 1;
+}
+
+#view_bar {
+    padding: 0.5rem;
+    font-size: 1.5rem;
+}
+
+#view_bar a {
+    color: unset;
+}
+
+#view_bar span {
+    padding-right: 1rem;
+    vertical-align: middle;
+}
+
+/* #view_content {
+  animation-name: slideUp;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  -webkit-animation-name: slideUp;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+} */
+
+.view-content-close {
+    background: transparent;
+    border: 1px solid transparent;
+    vertical-align: middle;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.view-content-close:hover {
+    border: 1px solid black;
+}
+
+.view-content-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#view_description > div {
+    padding: 0 0.5rem;
+}
+
+#view_description p {
+    white-space: pre-wrap;
+}
+
+.publication-date {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.publication-date > span {
+    background-color: white;
+    border-radius: 1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin-top: 3rem;
+    border: 1px solid #d4d3d3;
+}
+
+.view-description {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #d4d3d3;
 }
 
 .spinner-wrapper {
@@ -264,4 +376,28 @@ a, a:hover {
 		height: 200%;
 		opacity: 0;
 	}
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translate(0%,110%);
+    }
+    50% {
+        transform: translate(0%,100%);
+    }
+    100% {
+        transform: translate(0%,0%);
+    }
+}
+
+@-webkit-keyframes slideUp {
+    0% {
+        transform: translate(0%,110%);
+    }
+    50% {
+        transform: translate(0%,100%);
+    }
+    100% {
+        transform: translate(0%,0%);
+    }
 }
