@@ -22,8 +22,11 @@ class Profile extends React.Component {
     async componentDidMount() {
         document.title = `Perfil de @${this.props.profile} • Instractaram`;
         let result = await getUserInformation(this.props.profile);
+        let aditionalPages = new Array(result.edge_owner_to_timeline_media.edges);
+
         this.setState({
             userInformation: result,
+            aditionalPages: aditionalPages,
             currentCursor: result.edge_owner_to_timeline_media.page_info.end_cursor,
             hasNextPage: result.edge_owner_to_timeline_media.page_info.has_next_page }, addVisitProfile(result));
     }
@@ -139,14 +142,6 @@ class Profile extends React.Component {
                         </li>
                     </ul>
                     <div className="row no-gutters media-grid py-4">
-                        { this.state.userInformation.edge_owner_to_timeline_media.edges && this.state.userInformation.edge_owner_to_timeline_media.edges.map((post, index) =>
-                        <div className="col-4 col-md-3 text-center" key={index}>
-                            <figure className="media-wrapper" onClick={() => this.viewContent(post.node.__typename, post.node.shortcode)}>
-                                <img className="rounded" src={post.node.display_url} alt="post_preview" />
-                                <figcaption>{this.seeMediaTypeIcon(post.node.__typename)}</figcaption>
-                            </figure>
-                        </div>
-                        )}
                         { this.state.aditionalPages.length > 0 &&
                         <MediaGridContent pages={this.state.aditionalPages} seeMediaTypeIcon={this.seeMediaTypeIcon} viewContent={this.viewContent}></MediaGridContent> }
                     </div>

@@ -145,3 +145,15 @@ export const getMediaData = async (shortcode) => {
 
     return data;
 }
+
+export const copyLinkToClipboard = (event, text) => {
+    event.preventDefault();
+    var input = document.createElement("INPUT");
+    input.value = text;
+    document.body.append(input);
+    input.select();
+    input.setSelectionRange(0,99999);
+    document.execCommand("copy");
+    input.remove();
+    alert("Enlace copiado al portapapeles.");
+}

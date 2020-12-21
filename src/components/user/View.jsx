@@ -1,8 +1,9 @@
 import React from 'react';
 
 import history from '../../history';
-import { mediaTypes, getMediaData } from '../helpers';
+import { mediaTypes, getMediaData, copyLinkToClipboard } from '../helpers';
 import Image from './media/Image';
+import Gallery from './media/Gallery';
 
 class View extends React.Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class View extends React.Component {
         }
 
         this.monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        this.instagramLink = `https://www.instagram.com/p/${this.props.shortcode}`;
     }
 
     async componentDidMount() {
@@ -28,7 +30,9 @@ class View extends React.Component {
     manageContent = (mediaType) => {
         switch(mediaType) {
             case mediaTypes.IMAGE:
-                return <Image path={this.state.mediaData.display_url}></Image>
+                return <Image path={this.state.mediaData.display_url} alt={this.state.mediaData.accessibility_caption}></Image>
+            case mediaTypes.GALLERY:
+                return <Gallery images={this.state.mediaData.edge_sidecar_to_children.edges}></Gallery>
             default:
                 return <h1>No se puede mostrar el contenido en este momento.</h1>
         }
@@ -46,10 +50,13 @@ class View extends React.Component {
         };
     }
 
-    formatDate = (timestamp) => {
+    formatDate = (timestamp, toLocal = false) => {
         let date = new Date(timestamp * 1000);        
 
-        return this.monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+        if(toLocal)
+            return date.toLocaleString();
+        else
+            return this.monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
     }
 
     render() {console.log(this.state.mediaData);
@@ -58,7 +65,7 @@ class View extends React.Component {
             <div id="view_wrapper">
                 <div id="view_bar" className="row no-gutters align-items-center">
                     <div className="col-1">
-                        <a href={`https://www.instagram.com/p/${this.props.shortcode}`} target="_blank" rel="noreferrer" title="Abrir en Instagram">
+                        <a href={this.instagramLink} target="_blank" rel="noreferrer" title="Abrir en Instagram">
                             <i className="la la-external-link-alt"></i>
                         </a>
                     </div>
@@ -67,18 +74,43 @@ class View extends React.Component {
                         <span><i className="la la-comment"></i> { this.props.formatNumber(this.state.mediaData.edge_media_preview_comment.count) }</span>
                     </div>
                     <div className="col-1 text-right">
-                        <button className="view-content-close" title="Cerrar" onClick={() => this.closePopup()}><i className="la la-close"></i></button>
+                        <button className="view-bar-close" title="Cerrar" onClick={() => this.closePopup()}><i className="la la-close"></i></button>
                     </div>
                 </div>
-                <div id="view_content" className="row no-gutters">
-                    <div className="col col-md-7 mx-auto">
+                <div id="view_content" className="row no-gutters p-md-2">
+                    <div className="col-12 col-md-6">
                         { this.manageContent(this.props.mediaType) }
                     </div>
-                </div>
-                <div id="view_description" className="row no-gutters">
-                    <div className="col col-md-8 mx-auto">
-                        <p className="publication-date"><span>{ this.formatDate(this.state.mediaData.taken_at_timestamp) }</span></p>
-                        <p className="view-description"><span>{ this.state.mediaData.edge_media_to_caption.edges[0].node.text }</span></p>
+                    <div className="col-12 col-md-6">
+                        <div id="view_description" className="row">
+                            <div className="col">
+                                <p className="publication-date text-center text-md-left"><span>{ this.formatDate(this.state.mediaData.taken_at_timestamp) }</span></p>
+                                <p className="view-description"><span>{ this.state.mediaData.edge_media_to_caption.edges[0].node.text }</span></p>
+                                <a href={this.instagramLink} target="_blank" rel="noreferrer" className="d-block">Ver en Instagram</a>
+                                <a href={this.instagramLink} className="d-block mt-2" onClick={(event) => copyLinkToClipboard(event, this.instagramLink)}>Copiar enlace</a>
+                                <div id="view_comments" className="pt-4">
+                                    <h5 className="mb-4">Comentarios recientes</h5>
+                                    { this.state.mediaData.edge_media_to_parent_comment.edges && this.state.mediaData.edge_media_to_parent_comment.edges.reverse().map((comment, index) =>
+                                    <div className="row" key={index}>
+                                        <div className="col-auto">
+                                            <a href={`/user/${comment.node.owner.username}`}>
+                                                <img className="rounded-circle" width="50" height="50" src={comment.node.owner.profile_pic_url} alt={`${comment.node.owner.username}_picture`} />
+                                            </a>
+                                        </div>
+                                        <div className="col-9">
+                                            <a href={`/user/${comment.node.owner.username}`}>
+                                                <span className="pre-wrap">
+                                                    { comment.node.owner.is_verified && <i className="la la-check-circle la-lg text-danger"></i> }
+                                                    <b>{ comment.node.owner.username }</b>
+                                                </span>
+                                            </a>
+                                            <p className="mb-1">{ comment.node.text }</p>
+                                            <p className="text-muted">{ this.formatDate(comment.node.created_at, true) }</p>
+                                        </div>
+                                    </div> )}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
