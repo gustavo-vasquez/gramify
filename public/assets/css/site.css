@@ -289,32 +289,32 @@ a, a:hover {
 
 #view_content {
     height: calc(100% - 56px);
+    overflow-y: auto;
 }
 
 #view_content p {
     white-space: pre-wrap;
 }
 
-.view-content-image, #view_description {
+.view-content-media, #view_description {
     max-width: 100%;
-    max-height: 100%;
-    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    width: 100%;
-    height: auto;    
 }
 
-/* img[class*="pic"] {
-    animation: fade 3s infinite;
-} */
+@media (min-width: 768px) {
+    .view-content-media, #view_description {
+        max-height: 100%;
+        position: absolute;
+    }
 
-#view_description {
-    overflow-y: auto;
-    overflow-x: hidden;
+    #view_description {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 }
 
 .publication-date {
@@ -357,6 +357,7 @@ a, a:hover {
 
 .gallery-arrow:hover {
     color: white;
+    border-color: rgb(0 0 0 / 0.5);
 }
 
 .gallery-switch-buttons {
@@ -379,7 +380,7 @@ a, a:hover {
     color: crimson;
 }
 
-.gallery-switch-buttons > .btn:focus {
+.gallery-arrow:focus, .gallery-switch-buttons > .btn:focus {
     box-shadow: unset;
 }
 

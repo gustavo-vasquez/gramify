@@ -4,6 +4,7 @@ import history from '../../history';
 import { mediaTypes, getMediaData, copyLinkToClipboard } from '../helpers';
 import Image from './media/Image';
 import Gallery from './media/Gallery';
+import Video from './media/Video';
 
 class View extends React.Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class View extends React.Component {
 
     async componentDidMount() {
         document.addEventListener("keydown", this.closePopupOnEsc);
+        document.body.style.overflow = "hidden";
         let mediaData = await getMediaData(this.props.shortcode);
         this.setState({ mediaData: mediaData });
     }
@@ -33,6 +35,8 @@ class View extends React.Component {
                 return <Image path={this.state.mediaData.display_url} alt={this.state.mediaData.accessibility_caption}></Image>
             case mediaTypes.GALLERY:
                 return <Gallery images={this.state.mediaData.edge_sidecar_to_children.edges}></Gallery>
+            case mediaTypes.VIDEO:
+                return <Video path={this.state.mediaData.video_url}></Video>
             default:
                 return <h1>No se puede mostrar el contenido en este momento.</h1>
         }
@@ -82,7 +86,7 @@ class View extends React.Component {
                         { this.manageContent(this.props.mediaType) }
                     </div>
                     <div className="col-12 col-md-6">
-                        <div id="view_description" className="row">
+                        <div id="view_description" className="row pt-3 pt-md-0">
                             <div className="col">
                                 <p className="publication-date text-center text-md-left"><span>{ this.formatDate(this.state.mediaData.taken_at_timestamp) }</span></p>
                                 <p className="view-description"><span>{ this.state.mediaData.edge_media_to_caption.edges[0].node.text }</span></p>

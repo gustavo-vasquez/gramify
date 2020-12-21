@@ -71,7 +71,6 @@ class Profile extends React.Component {
     }
 
     viewContent = (mediaType, shortcode) => {
-        document.body.style.overflow = "hidden";
         history.push(`/user/${this.props.profile}/view/${mediaType}/${shortcode}`);
     }
 
