@@ -642,4 +642,5 @@ class Instagram {
   }
 }
 
-module.exports = Instagram
+//module.exports = Instagram
+export default Instagram;
