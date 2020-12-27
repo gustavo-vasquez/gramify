@@ -5,13 +5,9 @@ import Recent from '../search/Recent';
 import LastVisited from './LastVisited';
 
 class Main extends React.Component {
-    /* constructor(props) {
-        super(props);
-
-        this.state = {
-            username: ''
-        }
-    } */
+    componentDidMount() {
+        document.title = "Instractaram • Extraer fotos y videos de Instagram";
+    }
 
     render() {
         return (

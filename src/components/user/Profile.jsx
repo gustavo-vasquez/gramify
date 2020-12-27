@@ -19,9 +19,19 @@ class Profile extends React.Component {
         }
     }
 
-    async componentDidMount() {
-        document.title = `Perfil de @${this.props.profile} • Instractaram`;
-        let result = await getUserInformation(this.props.profile);
+    componentDidMount() {
+        this.loadProfile();
+    }
+
+    componentDidUpdate(prevProps,prevState) {
+        if(this.props.username !== prevProps.username) {
+            this.loadProfile();
+        }
+    }
+
+    loadProfile = async () => {
+        document.title = `Perfil de @${this.props.username} • Instractaram`;
+        let result = await getUserInformation(this.props.username);
         let aditionalPages = new Array(result.edge_owner_to_timeline_media.edges);
 
         this.setState({
@@ -43,11 +53,11 @@ class Profile extends React.Component {
 
     seeMediaTypeIcon = (typeName) => {
         switch(typeName) {
-            case mediaTypes.IMAGE:
+            case mediaTypes.IMAGE.name:
                 break;
-            case mediaTypes.GALLERY:
+            case mediaTypes.GALLERY.name:
                 return <i className="la la-copy"></i>
-            case mediaTypes.VIDEO:
+            case mediaTypes.VIDEO.name:
                 return <i className="la la-video"></i>
             default:
                 break;
@@ -71,10 +81,26 @@ class Profile extends React.Component {
     }
 
     viewContent = (mediaType, shortcode) => {
-        history.push(`/user/${this.props.profile}/view/${mediaType}/${shortcode}`);
+        let mediaTypeLabel;
+
+        switch(mediaType) {
+            case mediaTypes.IMAGE.name:
+                mediaTypeLabel = mediaTypes.IMAGE.label;
+                break;
+            case mediaTypes.GALLERY.name:
+                mediaTypeLabel = mediaTypes.GALLERY.label;
+                break;
+            case mediaTypes.VIDEO.name:
+                mediaTypeLabel = mediaTypes.VIDEO.label;
+                break;
+            default:
+                return;
+        }
+        
+        history.push(`/profile/${this.props.username}/view/${mediaTypeLabel}/${shortcode}`);
     }
 
-    render() {console.log(this.state.userInformation);
+    render() {//console.log(this.state.userInformation);
         if(this.state.userInformation === null)
             return <Spinner></Spinner>
         else
@@ -116,7 +142,7 @@ class Profile extends React.Component {
                     </div>
                     <ul className="row no-gutters nav nav-pills media-tabs-wrapper">
                         <li className="col-4 nav-item">
-                            <Link to={`/user/${this.props.profile}`} className={!this.props.tab ? "nav-link active" : "nav-link"}>
+                            <Link to={`/profile/${this.props.username}`} className={!this.props.tab ? "nav-link active" : "nav-link"}>
                                 <div className="media-tab-title">
                                     <i className="la la-photo-video"></i>
                                     <span> Todo</span>
@@ -124,7 +150,7 @@ class Profile extends React.Component {
                             </Link>
                         </li>
                         <li className="col-4 nav-item">
-                            <Link to={`/user/${this.props.profile}/photos`} className={this.props.tab === "photos" ? "nav-link active" : "nav-link"}>
+                            <Link to={`/profile/${this.props.username}/photos`} className={this.props.tab === "photos" ? "nav-link active" : "nav-link"}>
                                 <div className="media-tab-title">
                                     <i className="la la-photo"></i>
                                     <span> Fotos</span>
@@ -132,7 +158,7 @@ class Profile extends React.Component {
                             </Link>
                         </li>
                         <li className="col-4 nav-item">
-                            <Link to={`/user/${this.props.profile}/videos`} className={this.props.tab === "videos" ? "nav-link active" : "nav-link"}>
+                            <Link to={`/profile/${this.props.username}/videos`} className={this.props.tab === "videos" ? "nav-link active" : "nav-link"}>
                                 <div className="media-tab-title">
                                     <i className="la la-video"></i>
                                     <span> Videos</span>
@@ -140,19 +166,19 @@ class Profile extends React.Component {
                             </Link>
                         </li>
                     </ul>
-                    <div className="row no-gutters media-grid py-4">
+                    <div className="row no-gutters media-grid">
                         { this.state.aditionalPages.length > 0 &&
                         <MediaGridContent pages={this.state.aditionalPages} seeMediaTypeIcon={this.seeMediaTypeIcon} viewContent={this.viewContent}></MediaGridContent> }
                     </div>
                     { this.state.hasNextPage && 
                     <div className="text-center">
-                        <button className="btn btn-default add-more-content" onClick={() => this.addNewPage(this.props.profile, this.state.currentCursor)}><i className="la la-plus la-lg"></i> Cargar más contenido</button>
+                        <button className="btn btn-default add-more-content" onClick={() => this.addNewPage(this.props.username, this.state.currentCursor)}><i className="la la-plus la-lg"></i> Cargar más contenido</button>
                     </div> }
                     <Switch>
-                        <Route path="/user/:profile/view/:mediaType/:shortcode" children={({ match }) => <View profile={match.params.profile} mediaType={match.params.mediaType} shortcode={match.params.shortcode} formatNumber={this.formatNumber}></View>}></Route>
+                        <Route path="/profile/:username/view/:mediaType/:shortcode" children={({ match }) => <View username={match.params.username} mediaType={match.params.mediaType} shortcode={match.params.shortcode}></View>}></Route>
                     </Switch>
                 </React.Fragment>
-                : <Redirect to="/user/not-found"></Redirect>
+                : <Redirect to="/profile/not_found"></Redirect>
             );
     }
 }

@@ -15,12 +15,13 @@ class InstractaramApp extends React.Component {
                 <NavigationBar></NavigationBar>
                 <Switch>
                     <Route path="/search/:username" render={({ match }) => <Results username={match.params.username}></Results>}></Route>
-                    <Route path="/user/:profile/:tab" render={({ match }) => <Profile profile={match.params.profile} tab={match.params.tab}></Profile>}></Route>
-                    <Route path="/user/:profile" render={({ match }) => <Profile profile={match.params.profile}></Profile>}></Route>
-                    <Route path="/user/not-found" component={ProfileNotFound}></Route>
+                    <Route path="/profile/:username/:tab" render={({ match }) => <Profile username={match.params.username} tab={match.params.tab}></Profile>}></Route>
+                    <Route path="/profile/:username" render={({ match }) => <Profile username={match.params.username}></Profile>}></Route>
+                    <Route path="/profile/not_found" component={ProfileNotFound}></Route>
                     <Route exact path="/" component={Main}></Route>
                     <Route component={NotFound}></Route>
                 </Switch>
+                
             </React.Fragment>
         )
     }

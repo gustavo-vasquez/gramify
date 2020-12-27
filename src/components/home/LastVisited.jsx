@@ -25,7 +25,7 @@ class LastVisited extends React.Component {
                 <div className="row text-left">
                     { this.state.lastVisitedProfiles.map((visit, index) =>
                     <div className="col-12 col-md-3 mb-2" key={index}>
-                        <Link to={`/user/${visit.username}`} className="result-link">
+                        <Link to={`/profile/${visit.username}`} className="result-link">
                             <div className="card">
                                 <div className="card-body p-2">
                                     <div className="row no-gutters">

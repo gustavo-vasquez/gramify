@@ -58,6 +58,10 @@ body {
     background-color: #c3092c;
 }
 
+.btn-default:focus {
+    box-shadow: 0 0 0 0.2rem rgb(237 20 61 / 0.5);
+}
+
 a, a:hover {
     color: crimson;
 }
@@ -132,9 +136,9 @@ a, a:hover {
     transition-delay: 0s, 0s, 0s, 0s;
 }
 
-.media-tab-title {
+/* .media-tab-title {
     font-size: 1.1rem;
-}
+} */
 
 .media-tab-title > i {
     font-size: larger;
@@ -234,7 +238,7 @@ a, a:hover {
 
 .add-more-content {
     width: 50%;
-    margin: 0 auto 1.5rem auto;
+    margin: 1rem auto;
 }
 
 .page-separator {
@@ -313,7 +317,6 @@ a, a:hover {
 
     #view_description {
         overflow-y: auto;
-        overflow-x: hidden;
     }
 }
 

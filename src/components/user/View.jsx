@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import history from '../../history';
-import { mediaTypes, getMediaData, copyLinkToClipboard } from '../helpers';
+import { mediaTypes, getMediaData, copyLinkToClipboard, formatNumber } from '../helpers';
 import Image from './media/Image';
 import Gallery from './media/Gallery';
 import Video from './media/Video';
@@ -26,25 +27,25 @@ class View extends React.Component {
     }
 
     componentWillUnmount() {
+        document.body.style.overflow = "visible";
         document.removeEventListener("keydown", this.closePopupOnEsc);
     }
 
     manageContent = (mediaType) => {
         switch(mediaType) {
-            case mediaTypes.IMAGE:
+            case mediaTypes.IMAGE.label:
                 return <Image path={this.state.mediaData.display_url} alt={this.state.mediaData.accessibility_caption}></Image>
-            case mediaTypes.GALLERY:
+            case mediaTypes.GALLERY.label:
                 return <Gallery images={this.state.mediaData.edge_sidecar_to_children.edges}></Gallery>
-            case mediaTypes.VIDEO:
+            case mediaTypes.VIDEO.label:
                 return <Video path={this.state.mediaData.video_url}></Video>
             default:
-                return <h1>No se puede mostrar el contenido en este momento.</h1>
+                return alert("No se puede mostrar el contenido en este momento.");
         }
     }
 
     closePopup = () => {
-        document.body.style.overflow = "visible";
-        return history.push(`/user/${this.props.profile}`);
+        return history.push(`/profile/${this.props.username}`);
     }
 
     closePopupOnEsc = (event) => {
@@ -63,7 +64,7 @@ class View extends React.Component {
             return this.monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
     }
 
-    render() {console.log(this.state.mediaData);
+    render() {//console.log(this.state.mediaData);
         return (
             this.state.mediaData &&
             <div id="view_wrapper">
@@ -74,8 +75,8 @@ class View extends React.Component {
                         </a>
                     </div>
                     <div className="col-10 text-center">
-                        <span><i className="la la-heart"></i> { this.props.formatNumber(this.state.mediaData.edge_media_preview_like.count) }</span>&nbsp;
-                        <span><i className="la la-comment"></i> { this.props.formatNumber(this.state.mediaData.edge_media_preview_comment.count) }</span>
+                        <span><i className="la la-heart"></i> { formatNumber(this.state.mediaData.edge_media_preview_like.count) }</span>&nbsp;
+                        <span><i className="la la-comment"></i> { formatNumber(this.state.mediaData.edge_media_preview_comment.count) }</span>
                     </div>
                     <div className="col-1 text-right">
                         <button className="view-bar-close" title="Cerrar" onClick={() => this.closePopup()}><i className="la la-close"></i></button>
@@ -97,17 +98,17 @@ class View extends React.Component {
                                     { this.state.mediaData.edge_media_to_parent_comment.edges && this.state.mediaData.edge_media_to_parent_comment.edges.reverse().map((comment, index) =>
                                     <div className="row" key={index}>
                                         <div className="col-auto">
-                                            <a href={`/user/${comment.node.owner.username}`}>
+                                            <Link to={`/profile/${comment.node.owner.username}`}>
                                                 <img className="rounded-circle" width="50" height="50" src={comment.node.owner.profile_pic_url} alt={`${comment.node.owner.username}_picture`} />
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="col-9">
-                                            <a href={`/user/${comment.node.owner.username}`}>
+                                            <Link to={`/profile/${comment.node.owner.username}`}>
                                                 <span className="pre-wrap">
                                                     { comment.node.owner.is_verified && <i className="la la-check-circle la-lg text-danger"></i> }
                                                     <b>{ comment.node.owner.username }</b>
                                                 </span>
-                                            </a>
+                                            </Link>
                                             <p className="mb-1">{ comment.node.text }</p>
                                             <p className="text-muted">{ this.formatDate(comment.node.created_at, true) }</p>
                                         </div>

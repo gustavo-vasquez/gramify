@@ -6,9 +6,18 @@ const RECENT_SEARCHES_KEY = "recentSearches";
 const LAST_VISITED_PROFILES_KEY = "lastVisitedProfiles";
 
 export const mediaTypes = {
-    IMAGE: "GraphImage",
-    GALLERY: "GraphSidecar",
-    VIDEO: "GraphVideo"
+    IMAGE: {
+        name: "GraphImage",
+        label: "image"
+    },
+    GALLERY: {
+        name: "GraphSidecar",
+        label: "gallery"
+    },
+    VIDEO: {
+        name: "GraphVideo",
+        label: "video"
+    }
 }
 
 export const seeResults = async (event, history) => {
@@ -156,4 +165,14 @@ export const copyLinkToClipboard = (event, text) => {
     document.execCommand("copy");
     input.remove();
     alert("Enlace copiado al portapapeles.");
+}
+
+export const formatNumber = (n) => {
+    if(!isNaN(n)) {
+        if (n < 1e3) return n;
+        if (n >= 1e3 && n < 1e6) return +(n / 1e3).toFixed(1) + "K";
+        if (n >= 1e6 && n < 1e9) return +(n / 1e6).toFixed(1) + "M";
+        if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + "B";
+        if (n >= 1e12) return +(n / 1e12).toFixed(1) + "T";
+    }
 }

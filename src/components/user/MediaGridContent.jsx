@@ -1,11 +1,8 @@
 import React from 'react';
 
-//import { Spinner } from '../shared/Spinner';
-
 export const MediaGridContent = (props) => {
     return (
         <React.Fragment>
-            <hr className="page-separator" />
             {props.pages && props.pages.map((page) => 
             page.map((post, index) =>
             <div className="col-4 col-md-3 text-center" key={index}>

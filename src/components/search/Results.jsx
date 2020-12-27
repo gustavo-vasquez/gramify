@@ -47,7 +47,7 @@ class Results extends React.Component {
                 <div className="row pt-4">
                     { this.state.results.length > 0 ? this.state.results.map((result, index) =>
                         <div className="col-12 col-md-3 mb-2" key={index}>
-                            <Link to={`/user/${result.user.username}`} className="result-link">
+                            <Link to={`/profile/${result.user.username}`} className="result-link">
                                 <div className="card">
                                     <div className="card-body p-2">
                                         <div className="row no-gutters">
@@ -67,9 +67,9 @@ class Results extends React.Component {
                             </Link>
                         </div>
                     ) : <div className="text-center text-muted py-4 m-auto">
-                                <h3><i className="la la-low-vision"></i></h3>
-                                <h3>Sin resultados</h3>
-                            </div>}
+                            <h3><i className="la la-low-vision"></i></h3>
+                            <h3>Sin resultados</h3>
+                        </div>}
                 </div>}
             </div>
         );
