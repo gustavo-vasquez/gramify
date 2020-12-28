@@ -90,6 +90,7 @@ class View extends React.Component {
                         <div id="view_description" className="row pt-3 pt-md-0">
                             <div className="col">
                                 <p className="publication-date text-center text-md-left"><span>{ this.formatDate(this.state.mediaData.taken_at_timestamp) }</span></p>
+                                <a href={this.instagramLink} target="_blank" rel="noreferrer" className="d-block mb-2">Traducir</a>
                                 <p className="view-description"><span>{ this.state.mediaData.edge_media_to_caption.edges[0].node.text }</span></p>
                                 <a href={this.instagramLink} target="_blank" rel="noreferrer" className="d-block">Ver en Instagram</a>
                                 <a href={this.instagramLink} className="d-block mt-2" onClick={(event) => copyLinkToClipboard(event, this.instagramLink)}>Copiar enlace</a>

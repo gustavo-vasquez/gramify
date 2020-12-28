@@ -143,7 +143,7 @@ class Profile extends React.Component {
                     <ul className="row no-gutters nav nav-pills media-tabs-wrapper">
                         <li className="col-4 nav-item">
                             <Link to={`/profile/${this.props.username}`} className={!this.props.tab ? "nav-link active" : "nav-link"}>
-                                <div className="media-tab-title">
+                                <div className="media-tab-title truncate-text">
                                     <i className="la la-photo-video"></i>
                                     <span> Todo</span>
                                 </div>
@@ -151,7 +151,7 @@ class Profile extends React.Component {
                         </li>
                         <li className="col-4 nav-item">
                             <Link to={`/profile/${this.props.username}/photos`} className={this.props.tab === "photos" ? "nav-link active" : "nav-link"}>
-                                <div className="media-tab-title">
+                                <div className="media-tab-title truncate-text">
                                     <i className="la la-photo"></i>
                                     <span> Fotos</span>
                                 </div>
@@ -159,7 +159,7 @@ class Profile extends React.Component {
                         </li>
                         <li className="col-4 nav-item">
                             <Link to={`/profile/${this.props.username}/videos`} className={this.props.tab === "videos" ? "nav-link active" : "nav-link"}>
-                                <div className="media-tab-title">
+                                <div className="media-tab-title truncate-text">
                                     <i className="la la-video"></i>
                                     <span> Videos</span>
                                 </div>

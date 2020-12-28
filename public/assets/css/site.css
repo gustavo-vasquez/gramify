@@ -75,7 +75,6 @@ a, a:hover {
 }
 
 .recent-searches-wrapper {
-    padding-top: 0.5rem;
     font-size: 0.8rem;
     text-align: left;
     color: #721c24;
@@ -136,10 +135,6 @@ a, a:hover {
     transition-delay: 0s, 0s, 0s, 0s;
 }
 
-/* .media-tab-title {
-    font-size: 1.1rem;
-} */
-
 .media-tab-title > i {
     font-size: larger;
     vertical-align: middle;
@@ -155,6 +150,7 @@ a, a:hover {
 
 .pre-wrap {
     white-space: pre-wrap;
+    overflow-wrap: break-word;
 }
 
 .biography-size {
@@ -237,7 +233,7 @@ a, a:hover {
 }
 
 .add-more-content {
-    width: 50%;
+    min-width: 50%;
     margin: 1rem auto;
 }
 
@@ -255,7 +251,6 @@ a, a:hover {
   right: 0;
   bottom: 0;
   background-color: rgba(255,255,255,0.9);
-  /* overflow-y: scroll; */
   z-index: 2;
   animation-name: slideUp;
   animation-duration: 0.5s;
@@ -266,8 +261,8 @@ a, a:hover {
 }
 
 #view_bar {
-    padding: 0.5rem;
-    font-size: 1.5rem;
+    padding: 0.1rem 0.5rem;
+    font-size: 1.4rem;
 }
 
 #view_bar a {
@@ -277,6 +272,7 @@ a, a:hover {
 #view_bar span {
     padding-right: 1rem;
     vertical-align: middle;
+    font-size: smaller;
 }
 
 .view-bar-close {
@@ -298,6 +294,7 @@ a, a:hover {
 
 #view_content p {
     white-space: pre-wrap;
+    overflow-wrap: break-word;
 }
 
 .view-content-media, #view_description {

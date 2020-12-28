@@ -5,7 +5,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 class NavigationBar extends React.Component {
     render() {
         return (
-            <Navbar expand="lg" className="border-bottom px-0 mb-4">
+            <Navbar expand="lg" className="border-bottom px-0">
                 <Link className="navbar-brand" to="/"><i className="la la-instagram la-lg text-danger"></i> Instractaram</Link>
                 <Navbar.Toggle aria-controls="hamburger_menu" label="Toggle navigation" />
                 <Navbar.Collapse id="hamburger_menu">
