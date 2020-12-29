@@ -82,7 +82,7 @@ class View extends React.Component {
                         <button className="view-bar-close" title="Cerrar" onClick={() => this.closePopup()}><i className="la la-close"></i></button>
                     </div>
                 </div>
-                <div id="view_content" className="row no-gutters p-md-2">
+                <div id="view_content" className="row no-gutters py-1">
                     <div className="col-12 col-md-6">
                         { this.manageContent(this.props.mediaType) }
                     </div>

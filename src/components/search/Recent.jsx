@@ -44,12 +44,12 @@ class Recent extends React.Component {
         return (
             this.state.content.length > 0 &&
             <div className="row recent-searches-wrapper pt-md-2">
-                <div className="col-12 col-md-auto">
+                <div className="col-12 col-md-auto pr-md-0">
                     <p className="py-1 mb-0 text-dark">Búsquedas recientes:</p>
                 </div>
                 {this.state.content.map((username, index) =>
                 <div className="col-6 col-md-2" key={index}>
-                    <Alert dismissible>
+                    <Alert className="mb-2" dismissible>
                         <button type="button" className="close" onClick={() => this.removeTerm(username)} title="Borrar de la lista">&times;</button>
                         <div className="truncate-text pr-3">
                             <Link to={`/search/${username}`} title={username}>{username}</Link>
