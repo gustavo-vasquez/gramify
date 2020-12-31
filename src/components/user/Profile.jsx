@@ -113,7 +113,7 @@ class Profile extends React.Component {
                                 <img className="rounded-circle" width="150" height="150" src={this.state.userInformation.profile_pic_url_hd} alt="profile_picture" />
                             </div>
                         </div>
-                        <div className="col-12 col-md-9 text-center text-md-left py-3 py-md-0">
+                        <div className="col-12 col-md-9 text-center text-md-left pt-3 pt-md-0">
                             <h3 className="truncate-text mb-3">{this.state.userInformation.is_verified && <i className="la la-check-circle text-danger" title="Cuenta verificada"></i>} {this.state.userInformation.username}</h3>
                             <div className="row">
                                 <div className="col-4 col-md-auto">

@@ -37,7 +37,7 @@ class Results extends React.Component {
             <div>
                 <form action="/" onSubmit={(event) => seeResults(event, history)}>
                     <div className="input-group">
-                        <input type="text" name="username" className="form-control" placeholder="Ej: @instagram" defaultValue={this.props.username} required />
+                        <input type="text" name="username" className="form-control" placeholder="Ej: instagram" defaultValue={this.props.username} required />
                         <button className="btn" type="submit" title="Buscar ahora"><i className="la la-search"></i></button>
                     </div>
                 </form>

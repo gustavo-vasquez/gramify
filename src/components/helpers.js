@@ -26,6 +26,13 @@ export const seeResults = async (event, history) => {
     history.push(`/search/${username}`);
 }
 
+export const goToExtract = (event, history) => {
+    event.preventDefault();
+    const postLink = event.target.querySelector('[name="postLink"]').value;
+    let shortcode = postLink.substr(postLink.lastIndexOf('/') + 1);
+    history.push(`/extract/${shortcode}`);
+}
+
 export const searchUsers = async (username) => {
     let { users } = await client.search({ query: username, context: 'user' });
 
@@ -137,22 +144,25 @@ function containsUserProfile(obj, list) {
 }
 
 export const goNextPage = async (username, cursor) => {
-    let data = await client.getPhotosByUsername({ username: username, after: cursor });
-    //console.log(data);
-
-    if(data === undefined)
-        console.log("Venció la cuota de peticiones.");
-
-    return data;
+    try {
+        let data = await client.getPhotosByUsername({ username: username, after: cursor });
+        return data;
+    }
+    catch {
+        alert("No se pudo cargar las publicaciones. Inténtelo más tarde.");
+        window.location.reload();
+    }
 }
 
-export const getMediaData = async (shortcode) => {
-    let data = await client.getMediaByShortcode({ shortcode: shortcode });
-
-    if(data === undefined)
-        console.log("Venció la cuota de peticiones.");
-
-    return data;
+export const getMediaData = async (shortcode, history) => {
+    try {
+        let data = await client.getMediaByShortcode({ shortcode: shortcode });
+        return data;
+    }
+    catch {
+        alert("No se puede mostrar el contenido en este momento. Inténtelo más tarde.");
+        history.goBack();
+    }
 }
 
 export const copyLinkToClipboard = (event, text) => {

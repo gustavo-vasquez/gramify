@@ -6,6 +6,7 @@ import { mediaTypes, getMediaData, copyLinkToClipboard, formatNumber } from '../
 import Image from './media/Image';
 import Gallery from './media/Gallery';
 import Video from './media/Video';
+import { Spinner } from '../shared/Spinner';
 
 class View extends React.Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class View extends React.Component {
     async componentDidMount() {
         document.addEventListener("keydown", this.closePopupOnEsc);
         document.body.style.overflow = "hidden";
-        let mediaData = await getMediaData(this.props.shortcode);
+        let mediaData = await getMediaData(this.props.shortcode, history);
         this.setState({ mediaData: mediaData });
     }
 
@@ -59,15 +60,17 @@ class View extends React.Component {
         let date = new Date(timestamp * 1000);        
 
         if(toLocal)
-            return date.toLocaleString();
+            return date.toLocaleString("es-ES");
         else
             return this.monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
     }
 
     render() {//console.log(this.state.mediaData);
         return (
-            this.state.mediaData &&
             <div id="view_wrapper">
+                { !this.state.mediaData ?
+                <Spinner></Spinner> :
+                <React.Fragment>
                 <div id="view_bar" className="row no-gutters align-items-center">
                     <div className="col-1">
                         <a href={this.instagramLink} target="_blank" rel="noreferrer" title="Abrir en Instagram">
@@ -82,7 +85,7 @@ class View extends React.Component {
                         <button className="view-bar-close" title="Cerrar" onClick={() => this.closePopup()}><i className="la la-close"></i></button>
                     </div>
                 </div>
-                <div id="view_content" className="row no-gutters py-1">
+                <div id="view_content" className="row no-gutters">
                     <div className="col-12 col-md-6">
                         { this.manageContent(this.props.mediaType) }
                     </div>
@@ -90,10 +93,16 @@ class View extends React.Component {
                         <div id="view_description" className="row pt-3 pt-md-0">
                             <div className="col">
                                 <p className="publication-date text-center text-md-left"><span>{ this.formatDate(this.state.mediaData.taken_at_timestamp) }</span></p>
-                                <a href={this.instagramLink} target="_blank" rel="noreferrer" className="d-block mb-2">Traducir</a>
+                                <span className="d-block mb-2">
+                                    <a href={this.instagramLink}>Traducir</a>
+                                </span>
                                 <p className="view-description"><span>{ this.state.mediaData.edge_media_to_caption.edges[0].node.text }</span></p>
-                                <a href={this.instagramLink} target="_blank" rel="noreferrer" className="d-block">Ver en Instagram</a>
-                                <a href={this.instagramLink} className="d-block mt-2" onClick={(event) => copyLinkToClipboard(event, this.instagramLink)}>Copiar enlace</a>
+                                <span className="d-block mb-2">
+                                    <a href={this.instagramLink} target="_blank" rel="noreferrer">Ver en Instagram</a>
+                                </span>
+                                <span className="d-block mb-2">
+                                    <a href={this.instagramLink} onClick={(event) => copyLinkToClipboard(event, this.instagramLink)}>Copiar enlace</a>
+                                </span>
                                 <div id="view_comments" className="pt-4">
                                     <h5 className="mb-4">Comentarios recientes</h5>
                                     { this.state.mediaData.edge_media_to_parent_comment.edges && this.state.mediaData.edge_media_to_parent_comment.edges.reverse().map((comment, index) =>
@@ -119,6 +128,7 @@ class View extends React.Component {
                         </div>
                     </div>
                 </div>
+                </React.Fragment>}
             </div>
         );
     }

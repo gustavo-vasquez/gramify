@@ -5,6 +5,7 @@ import { NotFound } from './shared/NotFound';
 import NavigationBar from './shared/NavigationBar';
 import Main from './home/Main';
 import Results from './search/Results';
+import ExtractMedia from './extract/ExtractMedia';
 import Profile from './user/Profile';
 import { ProfileNotFound } from './user/ProfileNotFound';
 
@@ -15,13 +16,13 @@ class InstractaramApp extends React.Component {
                 <NavigationBar></NavigationBar>
                 <Switch>
                     <Route path="/search/:username" render={({ match }) => <Results username={match.params.username}></Results>}></Route>
+                    <Route path="/extract/:shortcode" render={({ match }) => <ExtractMedia shortcode={match.params.shortcode}></ExtractMedia>}></Route>
                     <Route path="/profile/:username/:tab" render={({ match }) => <Profile username={match.params.username} tab={match.params.tab}></Profile>}></Route>
                     <Route path="/profile/:username" render={({ match }) => <Profile username={match.params.username}></Profile>}></Route>
                     <Route path="/profile/not_found" component={ProfileNotFound}></Route>
                     <Route exact path="/" component={Main}></Route>
                     <Route component={NotFound}></Route>
                 </Switch>
-                
             </React.Fragment>
         )
     }

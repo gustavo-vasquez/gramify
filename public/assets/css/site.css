@@ -141,8 +141,8 @@ a, a:hover {
 
 .media-tabs-wrapper {
     text-align: center;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .media-tabs-wrapper a {
@@ -269,13 +269,13 @@ a, a:hover {
   right: 0;
   bottom: 0;
   background-color: rgba(255,255,255,0.9);
-  z-index: 2;
+  /* z-index: 2;
   animation-name: slideUp;
   animation-duration: 0.5s;
   animation-iteration-count: 1;
   -webkit-animation-name: slideUp;
   -webkit-animation-duration: 0.5s;
-  -webkit-animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1; */
 }
 
 #view_bar {
@@ -322,6 +322,13 @@ a, a:hover {
     left: 0;
     right: 0;
     margin: auto;
+}
+
+@media (max-width: 768px) {
+    video[class="view-content-media"] {
+        max-height: 30rem;
+        width: 100%;
+    }
 }
 
 @media (min-width: 768px) {
@@ -405,6 +412,8 @@ a, a:hover {
 
 .spinner-wrapper {
     padding: 1.5rem;
+    width: 100%;
+    height: 100%;
 }
 
 .spinner {
@@ -412,10 +421,11 @@ a, a:hover {
     border: 4px solid rgb(195 9 44 / 0.4);
     border-top-color: crimson;
     border-radius: 50%;
-    margin: 0 auto;
+    margin: auto;
     width: 3em;
     height: 3em;
     animation: spin 1s linear infinite;
+    top: 50%;
 }
   
 @keyframes spin {
