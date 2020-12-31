@@ -4,6 +4,7 @@ const { REACT_APP_USERNAME, REACT_APP_PASSWORD } = process.env;
 const client = new Instagram({ REACT_APP_USERNAME, REACT_APP_PASSWORD }, { language: 'es-ES' });
 const RECENT_SEARCHES_KEY = "recentSearches";
 const LAST_VISITED_PROFILES_KEY = "lastVisitedProfiles";
+const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
 export const mediaTypes = {
     IMAGE: {
@@ -185,4 +186,13 @@ export const formatNumber = (n) => {
         if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + "B";
         if (n >= 1e12) return +(n / 1e12).toFixed(1) + "T";
     }
+}
+
+export const formatDate = (timestamp, toLocal = false) => {
+    let date = new Date(timestamp * 1000);        
+
+    if(toLocal)
+        return date.toLocaleString("es-ES");
+    else
+        return monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
 }

@@ -308,6 +308,7 @@ a, a:hover {
 #view_content {
     height: calc(100% - 40.58px);
     overflow-y: auto;
+    padding-top: 0.5rem;
 }
 
 #view_content p {

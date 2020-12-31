@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import history from '../../history';
-import { mediaTypes, getMediaData, copyLinkToClipboard, formatNumber } from '../helpers';
+import { mediaTypes, getMediaData, copyLinkToClipboard, formatNumber, formatDate } from '../helpers';
 import Image from './media/Image';
 import Gallery from './media/Gallery';
 import Video from './media/Video';
@@ -16,7 +16,6 @@ class View extends React.Component {
             mediaData: null
         }
 
-        this.monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
         this.instagramLink = `https://www.instagram.com/p/${this.props.shortcode}`;
     }
 
@@ -56,13 +55,8 @@ class View extends React.Component {
         };
     }
 
-    formatDate = (timestamp, toLocal = false) => {
-        let date = new Date(timestamp * 1000);        
-
-        if(toLocal)
-            return date.toLocaleString("es-ES");
-        else
-            return this.monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+    translateText = (event) => {
+        event.preventDefault();
     }
 
     render() {//console.log(this.state.mediaData);
@@ -92,9 +86,9 @@ class View extends React.Component {
                     <div className="col-12 col-md-6">
                         <div id="view_description" className="row pt-3 pt-md-0">
                             <div className="col">
-                                <p className="publication-date text-center text-md-left"><span>{ this.formatDate(this.state.mediaData.taken_at_timestamp) }</span></p>
+                                <p className="publication-date text-center text-md-left"><span>{ formatDate(this.state.mediaData.taken_at_timestamp) }</span></p>
                                 <span className="d-block mb-2">
-                                    <a href={this.instagramLink}>Traducir</a>
+                                    <a href={this.instagramLink} onClick={(event) => this.translateText(event)}>Traducir</a>
                                 </span>
                                 <p className="view-description"><span>{ this.state.mediaData.edge_media_to_caption.edges[0].node.text }</span></p>
                                 <span className="d-block mb-2">
@@ -120,7 +114,7 @@ class View extends React.Component {
                                                 </span>
                                             </Link>
                                             <p className="mb-1">{ comment.node.text }</p>
-                                            <p className="text-muted">{ this.formatDate(comment.node.created_at, true) }</p>
+                                            <p className="text-muted">{ formatDate(comment.node.created_at, true) }</p>
                                         </div>
                                     </div> )}
                                 </div>

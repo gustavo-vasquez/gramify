@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { mediaTypes, getMediaData } from '../helpers';
+import { mediaTypes, getMediaData, formatDate } from '../helpers';
 import { Spinner } from '../shared/Spinner';
 
-class ExtractMedia extends React.Component {
+class Extract extends React.Component {
     constructor(props) {
         super(props);
 
@@ -28,7 +28,9 @@ class ExtractMedia extends React.Component {
                 return (
                     <div className="col-12 col-md-6">
                         <img className="rounded mw-100" src={this.state.content.display_url} alt={this.state.content.accessibility_caption} />
-                        <button className="btn btn-default my-3"><i className="la la-download la-lg"></i> Descargar</button>
+                        <div>
+                            <button className="btn btn-default my-3"><i className="la la-download la-lg"></i> Descargar</button>
+                        </div>
                     </div>
                 );
             case mediaTypes.GALLERY.name:
@@ -36,7 +38,9 @@ class ExtractMedia extends React.Component {
                     this.state.content.edge_sidecar_to_children.edges.map((image, index) =>
                     <div className="col-12 col-md-6" key={index}>
                         <img className="rounded mw-100" src={image.node.display_url} alt={image.node.accessibility_caption} />
-                        <button className="btn btn-default my-3"><i className="la la-download la-lg"></i> Descargar</button>
+                        <div>
+                            <button className="btn btn-default my-3"><i className="la la-download la-lg"></i> Descargar</button>
+                        </div>
                     </div>)
                 );
             case mediaTypes.VIDEO.name:
@@ -45,7 +49,9 @@ class ExtractMedia extends React.Component {
                         <video className="mw-100" controls>
                             <source src={this.state.content.video_url} type="video/mp4"/>
                         </video>
-                        <button className="btn btn-default my-3"><i className="la la-download la-lg"></i> Descargar</button>
+                        <div>
+                            <button className="btn btn-default my-3"><i className="la la-download la-lg"></i> Descargar</button>
+                        </div>
                     </div>
                 );
             default:
@@ -58,7 +64,8 @@ class ExtractMedia extends React.Component {
             !this.state.content ?
             <Spinner></Spinner> :
             <div className="text-center">
-                <p>Contenido publicado por <Link to={`/profile/${this.state.content.owner.username}`}>@{this.state.content.owner.username}</Link></p>
+            <p>{ formatDate(this.state.content.taken_at_timestamp) }</p>
+            <p>Contenido publicado por <Link to={`/profile/${this.state.content.owner.username}`}>@{this.state.content.owner.username}</Link></p>
                 <div className="row justify-content-center">
                     {this.manageContent(this.state.content.__typename)}
                 </div>
@@ -67,4 +74,4 @@ class ExtractMedia extends React.Component {
     }
 }
 
-export default ExtractMedia;
+export default Extract;
