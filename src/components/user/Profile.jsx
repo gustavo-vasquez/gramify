@@ -20,6 +20,7 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
+        document.title = `Perfil de @${this.props.username} • Instractaram`;
         this.loadProfile();
     }
 
@@ -30,7 +31,6 @@ class Profile extends React.Component {
     }
 
     loadProfile = async () => {
-        document.title = `Perfil de @${this.props.username} • Instractaram`;
         let result = await getUserInformation(this.props.username);
         let aditionalPages = new Array(result.edge_owner_to_timeline_media.edges);
 

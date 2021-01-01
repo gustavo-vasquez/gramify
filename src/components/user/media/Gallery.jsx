@@ -36,8 +36,14 @@ class Gallery extends React.Component {
         return (
             <React.Fragment>
                 <img className="view-content-media mt-0 mt-md-auto" src={this.props.images[this.state.currentIndex].node.display_url} alt={this.props.images[this.state.currentIndex].node.accessibility_caption} />
-                { this.state.currentIndex !== 0 && <button className="btn gallery-arrow left" onClick={() => this.slideTo("left")} title="Anterior">&lsaquo;</button> }
-                { this.state.currentIndex !== (this.props.images.length - 1) && <button className="btn gallery-arrow right" onClick={() => this.slideTo("right")} title="Siguiente">&rsaquo;</button> }
+                { this.state.currentIndex !== 0 && 
+                <div className="gallery-arrow left">
+                    <button className="btn" onClick={() => this.slideTo("left")} title="Anterior">&lsaquo;</button>
+                </div> }
+                { this.state.currentIndex !== (this.props.images.length - 1) &&
+                <div className="gallery-arrow right">
+                    <button className="btn" onClick={() => this.slideTo("right")} title="Siguiente">&rsaquo;</button>
+                </div> }
                 <div className="gallery-switch-buttons">
                 { this.props.images && this.props.images.map((image, index) =>
                     <button className={this.state.currentIndex === index ? "btn active" : "btn"} onClick={() => this.switchToImage(index)} key={index}>&bull;</button>

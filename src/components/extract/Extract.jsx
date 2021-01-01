@@ -14,6 +14,7 @@ class Extract extends React.Component {
     }
 
     componentDidMount() {
+        document.title = "Descarga de contenido por enlace • Instractaram";
         this.extractByMediaLink();
     }
 
@@ -59,7 +60,7 @@ class Extract extends React.Component {
         }
     }
 
-    render() {console.log(this.state.content);
+    render() {
         return (
             !this.state.content ?
             <Spinner></Spinner> :

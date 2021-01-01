@@ -360,17 +360,21 @@ a, a:hover {
     position: absolute;
     top: 0;
     bottom: 0;
-    z-index: 1;
     margin: auto;
-    font-weight: bold;
+}
+
+.gallery-arrow > .btn {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-size: 4rem;
     color: white;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    height: intrinsic;
-    height: -moz-max-content;
-    height: -webkit-max-content;
-    height: max-content;
-    opacity: 0.9;
+    text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000;
+}
+
+.gallery-arrow > .btn:focus {
+    box-shadow: none;
 }
 
 .gallery-arrow.left {
@@ -381,9 +385,8 @@ a, a:hover {
     right: 0;
 }
 
-.gallery-arrow:hover {
+.gallery-arrow > .btn:hover {
     color: white;
-    border-color: rgb(0 0 0 / 0.5);
 }
 
 .gallery-switch-buttons {
@@ -399,7 +402,7 @@ a, a:hover {
 .gallery-switch-buttons > button {
     font-size: 1.5rem;
     color: white;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000;
     padding: 0 0.5rem;
 }
 
